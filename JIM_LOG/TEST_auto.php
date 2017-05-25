@@ -4,19 +4,18 @@
    <meta charset="utf-8">
    <title>簡單測試</title>
       <script type="text/javascript">
-        var roomId_key =<?=$_GET["room"];?>;
        function WebSocketTest() {
      if ("WebSocket" in window) {
          //alert("您的浏览器支持 WebSocket!");
 
          // 打开一个 web socket
          //var ws = new WebSocket("ws://172.17.10.30:9511");
-        //var ws = new WebSocket("ws://172.17.10.30/majong_websocket");
+		//var ws = new WebSocket("ws://172.17.10.30/majong_websocket");
         var ws = new WebSocket("ws://172.17.10.31:9511");
          ws.onopen = function() {
              // Web Socket 已连接上，使用 send() 方法发送数据
            var sendObj = {
-                 roomId: roomId_key,
+                 roomId: 3,
                  player: 1,
                  type: 101,
                  event: 'JoinRoom',
@@ -25,7 +24,7 @@
              ws.send(JSON.stringify(sendObj));
 
              var sendObj = {
-                 roomId: roomId_key,
+                 roomId: 3,
                  player: 1,
                  type: 0,
                  event: 'initCard',
@@ -50,7 +49,7 @@
                  document.getElementById("demo").innerHTML = "產生牌盒" + evt.data;
                  //alert("抽牌");
                  var sendObj = {
-                     roomId: roomId_key,
+                     roomId: 3,
                      player: 1,
                      type: 1,
                      event: 'getCard',
@@ -63,22 +62,20 @@
 
 var n1 = JSON.parse("" + obj.Round + "");
 var n = JSON.stringify(n1);
-var n1 = JSON.parse("" + obj.Round + "");
-var n = JSON.stringify(n1);
 
 var endCard1 = JSON.parse("[" + obj.cardData.endCard + "]");
 var EDlength = endCard1.length ;
 //alert(EDlength ) ;
 if(EDlength > 0  )
 {
-    var start = new Date().getTime();
+     var start = new Date().getTime();
     while (new Date().getTime() < start + 300); // JS 模擬sleep 每0.1秒打一張
     switch (n) {
             case '1234':
     var player_hand = JSON.parse("[" + obj.cardData.player1 + "]");
                  //alert(player_hand[13]);
                   var sendObj = {
-                     roomId: roomId_key,
+                     roomId: 3,
                      player: 1,
                      type: 2,
                      event: 'outCard',
@@ -90,7 +87,7 @@ if(EDlength > 0  )
  var player_hand = JSON.parse("[" + obj.cardData.player2+ "]");
                  //alert(player_hand[13]);
                   var sendObj = {
-                     roomId: roomId_key,
+                     roomId: 3,
                      player: 2,
                      type: 2,
                      event: 'outCard',
@@ -102,7 +99,7 @@ if(EDlength > 0  )
  var player_hand = JSON.parse("[" + obj.cardData.player3 + "]");
                  //alert(player_hand[13]);
                   var sendObj = {
-                     roomId: roomId_key,
+                     roomId: 3,
                      player: 3,
                      type: 2,
                      event: 'outCard',
@@ -114,7 +111,7 @@ if(EDlength > 0  )
  var player_hand = JSON.parse("[" + obj.cardData.player4 + "]");
                  //alert(player_hand[13]);
                   var sendObj = {
-                     roomId: roomId_key,
+                     roomId: 3,
                      player: 4,
                      type: 2,
                      event: 'outCard',
@@ -135,7 +132,7 @@ if(EDlength > 0  )
     // {
 
              var sendObj = {
-                 roomId: roomId_key,
+                 roomId: 3,
                  player: 1,
                  type: 0,
                  event: 'initCard',
@@ -171,14 +168,17 @@ if(EDlength > 0  )
       </script>
 
    </head>
-   <body onload="javascript:WebSocketTest()">
+   <body onload="WebSocketTest()">
 
-    <p id="demo"></p>
-    <p id="demo2"></p>
-    <p id="demo2_1"></p>
-    <p id="demo3"></p>
-    <p id="demo4"></p>
-    <p id="list"></p>
+      <div>
+         <a href="javascript:WebSocketTest()">測試產生</a>
+      </div>
+	<p id="demo"></p>
+	<p id="demo2"></p>
+	<p id="demo2_1"></p>
+	<p id="demo3"></p>
+	<p id="demo4"></p>
+	<p id="list"></p>
 
    </body>
 </html>

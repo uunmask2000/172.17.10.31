@@ -23,7 +23,7 @@ var iframeid=document.getElementById("mainframe"); //iframe id
 </script>
 <?php
 
-for ($i = 3; $i <= 5; $i++) {
+for ($i = 3; $i <= 10; $i++) {
 
 	//echo '<iframe src="TEST_frame.php?room=' . $i . '" ></iframe>';
 	echo '<iframe src="TEST_frame.php?room=' . $i . '" name="mainframe" width="100%" marginwidth="0" marginheight="0" onload="Javascript:SetCwinHeight()"  scrolling="yes" frameborder="0" id="mainframe"  ></iframe>';
