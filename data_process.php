@@ -733,6 +733,9 @@ class DataProcessServer {
 				} else if ($row != '0' and $row2 == '0' and $row3 != '0') {
 					$Arr2[1] = $data2;
 					return $Arr2;
+				} else if ($row == '0' and $row2 != '0' and $row3 != '0') {
+					$Arr1[1] = $data2;
+					return $Arr1;
 				} else {
 					return -1;
 				}
