@@ -1,0 +1,11 @@
+1.cd  /usr/share/nginx/html/swoole_server
+2.php data_process.php  // 資料處理 
+3.php broadcast.php    // broadcast 廣播
+4.php taskServer.php   // 程序
+--
+1.1 sudo service nginx start
+2.1 sudo service redis start
+--
+nohup php data_process.php >/dev/null 2>&1 &  // 資料處理 
+nohup php broadcast.php >/dev/null 2>&1 &    // broadcast 廣播
+nohup php taskServer.php >/dev/null 2>&1 &    // 程序
