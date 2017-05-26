@@ -361,8 +361,8 @@ class DataProcessServer {
 		//$P1_result[] = array();
 		//$P1_result["RECEIVE"] = $this->check_RECEIVE($player2, $parseData["data"]);
 		$P1_result["RECEIVE"] = -1;
-		$P1_result["BUMP"] = $this->check_BUMP($player2, $parseData["data"]);
-		$P1_result["BARS"] = $this->check_BARS($player2, $parseData["data"]);
+		$P1_result["BUMP"] = $this->check_BUMP($player1, $parseData["data"]);
+		$P1_result["BARS"] = $this->check_BARS($player1, $parseData["data"]);
 		//$P3_result[] = array();
 		$P3_result["RECEIVE"] = $this->check_RECEIVE($player3, $parseData["data"]);
 		$P3_result["BUMP"] = $this->check_BUMP($player3, $parseData["data"]);
@@ -387,8 +387,8 @@ class DataProcessServer {
 		//$P1_result[] = array();
 		//$P1_result["RECEIVE"] = $this->check_RECEIVE($player2, $parseData["data"]);
 		$P1_result["RECEIVE"] = -1;
-		$P1_result["BUMP"] = $this->check_BUMP($player3, $parseData["data"]);
-		$P1_result["BARS"] = $this->check_BARS($player3, $parseData["data"]);
+		$P1_result["BUMP"] = $this->check_BUMP($player1, $parseData["data"]);
+		$P1_result["BARS"] = $this->check_BARS($player1, $parseData["data"]);
 		//$P4_result[] = array();
 		$P4_result["RECEIVE"] = $this->check_RECEIVE($player4, $parseData["data"]);
 		$P4_result["BUMP"] = $this->check_BUMP($player4, $parseData["data"]);
@@ -411,9 +411,9 @@ class DataProcessServer {
 		$P3_result["BUMP"] = $this->check_BUMP($player3, $parseData["data"]);
 		$P3_result["BARS"] = $this->check_BARS($player3, $parseData["data"]);
 		//$P1_result[] = array();
-		$P1_result["RECEIVE"] = $this->check_RECEIVE($player4, $parseData["data"]);
-		$P1_result["BUMP"] = $this->check_BUMP($player4, $parseData["data"]);
-		$P1result["BARS"] = $this->check_BARS($player4, $parseData["data"]);
+		$P1_result["RECEIVE"] = $this->check_RECEIVE($player1, $parseData["data"]);
+		$P1_result["BUMP"] = $this->check_BUMP($player1, $parseData["data"]);
+		$P1result["BARS"] = $this->check_BARS($player1, $parseData["data"]);
 		$result["P1"] = $P1_result;
 		$result["P2"] = $P2_result;
 		$result["P3"] = $P3_result;
