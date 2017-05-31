@@ -15,54 +15,110 @@ class Userinformation {
 	public function Call_check() {
 		return true;
 	}
-	public function RECEIVE($data, $cardData) {
+	public function RECEIVE($data, $cardData, $push_out_card2, $Round_row, $Round) {
 		//return true;
 		$parseData = json_decode($data, true);
-		$push_out_card2 = (json_decode($this->redis->hget("push_out_card", $parseData['roomId']), true)); //查詢 廢棄池牌
-		$Round_row = json_decode($this->redis->hget("Round_row", $parseData['roomId']), true); //取得回合數
-		$Round = json_decode($this->redis->hget("Round", $parseData['roomId']), true);
-
 		$output = explode(",", substr($push_out_card2, 0, -1));
 		echo end($output) . "\n";
-		//print_r($cardData) . "\n";
-		//echo "\n";
-		//print_r($parseData) . "\n";
-		//echo "\n";
-		print_r($Round_row) . "\n"; // 目前回合數
-		echo "\n";
-		//print_r($Round) . "\n"; //下家
-		//echo "\n";
+		if ($parseData["data"][1] != end($output)) {
+			echo "違法送Vaule\n";
+			return -1;
+		} else {
+			//unset($parseData["data"][2]);
+			$row = 0;
+			$Puse = $parseData["player"];
+			array_push($cardData["player" . $Puse], end($output));
+			print_r($cardData["player" . $Puse]);
+			foreach ($parseData["data"] as $key => $value) {
+				//echo $value . "\n";
+				foreach ($cardData["player" . $Puse] as $key2 => $value2) {
+
+					if ($value == $value2 and $row != 3) {
+						unset($cardData["player" . $parseData["player"]][$key2]);
+						//unset($parseData["data"][$key]);
+						$row++;
+					}
+				}
+			}
+			if ($row = 3) {
+				$cardData["player" . $parseData["player"]] = array_values($cardData["player" . $parseData["player"]]);
+				//print_r($cardData["player" . $parseData["player"]]);
+				if ($cardData["PUTDATE"]["player" . $parseData["player"]]["SHUN"] == ' ') {
+					$cardData["PUTDATE"]["player" . $parseData["player"]]["SHUN"] = array();
+				}
+
+				//$cardData["PUTDATE"]["player" . $parseData["player"]]["SHUN"] = array_merge($cardData["PUTDATE"]["player" . $parseData["player"]]["SHUN"], $parseData2["data"]);
+				$cardData["PUTDATE"]["player" . $parseData["player"]]["SHUN"] = array_merge($cardData["PUTDATE"]["player" . $parseData["player"]]["SHUN"], $parseData["data"]);
+				$deCodeData = json_decode($data, true);
+				switch ($parseData["player"]) {
+				case "1":
+					$Round_array = "1234";
+					$retVal = [];
+					$retVal['event'] = $parseData['event'];
+					//$retVal['event'] = "A ";
+					$retVal['userData'] = $deCodeData;
+					$retVal['Round'] = $Round_array;
+					$retVal['Round_row'] = $Round_row + 1;
+					$retVal['cardData'] = $cardData;
+					$retVal = json_encode($retVal);
+					return $retVal;
+					break;
+				case "2":
+					$Round_array = "2341";
+					$retVal = [];
+					$retVal['event'] = $parseData['event'];
+					//$retVal['event'] = " A ";
+					$retVal['userData'] = $deCodeData;
+					$retVal['Round'] = $Round_array;
+					$retVal['Round_row'] = $Round_row + 1;
+					$retVal['cardData'] = $cardData;
+					$retVal = json_encode($retVal);
+					return $retVal;
+					break;
+				case "3":
+					$Round_array = "3412";
+					$retVal = [];
+					$retVal['event'] = $parseData['event'];
+					//$retVal['event'] = " A ";
+					$retVal['userData'] = $deCodeData;
+					$retVal['Round'] = $Round_array;
+					$retVal['Round_row'] = $Round_row + 1;
+					$retVal['cardData'] = $cardData;
+					$retVal = json_encode($retVal);
+					return $retVal;
+					break;
+				case "4":
+					$Round_array = "4123";
+					$retVal = [];
+					$retVal['event'] = $parseData['event'];
+					//$retVal['event'] = " A ";
+					$retVal['userData'] = $deCodeData;
+					$retVal['Round'] = $Round_array;
+					$retVal['Round_row'] = $Round_row + 1;
+					$retVal['cardData'] = $cardData;
+					$retVal = json_encode($retVal);
+					return $retVal;
+					break;
+				}
+			} else {
+				echo "違法送Vaule\n";
+				return -1;
+			}
+
+		}
 
 	}
-	public function BUMP($data, $cardData) {
+	public function BUMP($data, $cardData, $push_out_card2, $Round_row, $Round) {
 		//return true;
 		$parseData = json_decode($data, true);
-		$push_out_card2 = (json_decode($this->redis->hget("push_out_card", $parseData['roomId']), true)); //查詢 廢棄池牌
-		$Round_row = json_decode($this->redis->hget("Round_row", $parseData['roomId']), true); //取得回合數
-		$Round = json_decode($this->redis->hget("Round", $parseData['roomId']), true);
-
 		$output = explode(",", substr($push_out_card2, 0, -1));
-		echo end($output) . "\n";
-		//print_r($cardData) . "\n";
-		//echo "\n";
-		//print_r($parseData) . "\n";
-		//echo "\n";
-		//print_r($Round_row) . "\n"; // 目前回合數
-		//echo "\n";
-		//print_r($Round) . "\n"; //下家
-		//echo "\n";) . "\n"; //下家
-		//echo "\n";
-		//$parseData["player"]  //玩家
-		//$parseData["data"]    // 資訊
-		//array_push($cardData["player" . $parseData["player"]], end($output));
-		//print_r($cardData["player" . $parseData["player"]]);
 		if ($parseData["data"][0] != end($output)) {
 			echo "違法送Vaule\n";
 			return -1;
 		} else {
 			$row = 0;
 			foreach ($cardData["player" . $parseData["player"]] as $key => $value) {
-				if ($row < 3) {
+				if ($row != 2) {
 
 					if ($value == end($output)) {
 						unset($cardData["player" . $parseData["player"]][$key]);
@@ -79,36 +135,39 @@ class Userinformation {
 			$deCodeData = json_decode($data, true);
 			switch ($parseData["player"]) {
 			case "1":
-				$Round_array = "2341";
+				$Round_array = "1234";
 				$retVal = [];
 				$retVal['event'] = $parseData['event'];
 				//$retVal['event'] = "A ";
 				$retVal['userData'] = $deCodeData;
 				$retVal['Round'] = $Round_array;
-				$retVal['Round_row'] = $Round_row;
+				$retVal['Round_row'] = $Round_row + 1;
 				$retVal['cardData'] = $cardData;
+				$retVal = json_encode($retVal);
 				return $retVal;
 				break;
 			case "2":
+				$Round_array = "2341";
+				$retVal = [];
+				$retVal['event'] = $parseData['event'];
+				//$retVal['event'] = " A ";
+				$retVal['userData'] = $deCodeData;
+				$retVal['Round'] = $Round_array;
+				$retVal['Round_row'] = $Round_row + 1;
+				$retVal['cardData'] = $cardData;
+				$retVal = json_encode($retVal);
+				return $retVal;
+				break;
+			case "3":
 				$Round_array = "3412";
 				$retVal = [];
 				$retVal['event'] = $parseData['event'];
 				//$retVal['event'] = " A ";
 				$retVal['userData'] = $deCodeData;
 				$retVal['Round'] = $Round_array;
-				$retVal['Round_row'] = $Round_row;
+				$retVal['Round_row'] = $Round_row + 1;
 				$retVal['cardData'] = $cardData;
-				return $retVal;
-				break;
-			case "3":
-				$Round_array = "4123";
-				$retVal = [];
-				$retVal['event'] = $parseData['event'];
-				//$retVal['event'] = " A ";
-				$retVal['userData'] = $deCodeData;
-				$retVal['Round'] = $Round_array;
-				$retVal['Round_row'] = $Round_row;
-				$retVal['cardData'] = $cardData;
+				$retVal = json_encode($retVal);
 				return $retVal;
 				break;
 			case "4":
@@ -118,7 +177,7 @@ class Userinformation {
 				//$retVal['event'] = " A ";
 				$retVal['userData'] = $deCodeData;
 				$retVal['Round'] = $Round_array;
-				$retVal['Round_row'] = $Round_row;
+				$retVal['Round_row'] = $Round_row + 1;
 				$retVal['cardData'] = $cardData;
 				$retVal = json_encode($retVal);
 				return $retVal;
@@ -128,23 +187,83 @@ class Userinformation {
 		}
 
 	}
-	public function BARS($data, $cardData) {
+	public function BARS($data, $cardData, $push_out_card2, $Round_row, $Round) {
 		//return true;
 		$parseData = json_decode($data, true);
-		$push_out_card2 = (json_decode($this->redis->hget("push_out_card", $parseData['roomId']), true)); //查詢 廢棄池牌
-		$Round_row = json_decode($this->redis->hget("Round_row", $parseData['roomId']), true); //取得回合數
-		$Round = json_decode($this->redis->hget("Round", $parseData['roomId']), true);
-
 		$output = explode(",", substr($push_out_card2, 0, -1));
-		echo end($output) . "\n";
-		//print_r($cardData) . "\n";
-		//echo "\n";
-		//print_r($parseData) . "\n";
-		//echo "\n";
-		print_r($Round_row) . "\n"; // 目前回合數
-		echo "\n";
-		//print_r($Round) . "\n"; //下家
-		//echo "\n";
+		if ($parseData["data"][0] != end($output)) {
+			echo "違法送Vaule\n";
+			return -1;
+		} else {
+			$row = 0;
+			foreach ($cardData["player" . $parseData["player"]] as $key => $value) {
+				if ($row != 3) {
+
+					if ($value == end($output)) {
+						unset($cardData["player" . $parseData["player"]][$key]);
+						$row++;
+					}
+				}
+			}
+			$cardData["player" . $parseData["player"]] = array_values($cardData["player" . $parseData["player"]]);
+			//print_r($cardData["player" . $parseData["player"]]);
+			if ($cardData["PUTDATE"]["player" . $parseData["player"]]["BARS"] == ' ') {
+				$cardData["PUTDATE"]["player" . $parseData["player"]]["BARS"] = array();
+			}
+			$cardData["PUTDATE"]["player" . $parseData["player"]]["BARS"] = array_merge($cardData["PUTDATE"]["player" . $parseData["player"]]["BARS"], $parseData["data"]);
+			$deCodeData = json_decode($data, true);
+			switch ($parseData["player"]) {
+			case "1":
+				$Round_array = "1234";
+				$retVal = [];
+				$retVal['event'] = $parseData['event'];
+				//$retVal['event'] = "A ";
+				$retVal['userData'] = $deCodeData;
+				$retVal['Round'] = $Round_array;
+				$retVal['Round_row'] = $Round_row + 1;
+				$retVal['cardData'] = $cardData;
+				$retVal = json_encode($retVal);
+				return $retVal;
+				break;
+			case "2":
+				$Round_array = "2341";
+				$retVal = [];
+				$retVal['event'] = $parseData['event'];
+				//$retVal['event'] = " A ";
+				$retVal['userData'] = $deCodeData;
+				$retVal['Round'] = $Round_array;
+				$retVal['Round_row'] = $Round_row + 1;
+				$retVal['cardData'] = $cardData;
+				$retVal = json_encode($retVal);
+				return $retVal;
+				break;
+			case "3":
+				$Round_array = "3412";
+				$retVal = [];
+				$retVal['event'] = $parseData['event'];
+				//$retVal['event'] = " A ";
+				$retVal['userData'] = $deCodeData;
+				$retVal['Round'] = $Round_array;
+				$retVal['Round_row'] = $Round_row + 1;
+				$retVal['cardData'] = $cardData;
+				$retVal = json_encode($retVal);
+				return $retVal;
+				break;
+			case "4":
+				$Round_array = "4123";
+				$retVal = [];
+				$retVal['event'] = $parseData['event'];
+				//$retVal['event'] = " A ";
+				$retVal['userData'] = $deCodeData;
+				$retVal['Round'] = $Round_array;
+				$retVal['Round_row'] = $Round_row + 1;
+				$retVal['cardData'] = $cardData;
+				$retVal = json_encode($retVal);
+				return $retVal;
+				break;
+			}
+
+		}
 
 	}
 
@@ -245,137 +364,132 @@ class Userinformation {
 		}
 
 	}
+	public function check_null($xx) {
+		if ($xx == " ") {
+			return 0;
+		} else {
+			return count($xx);
+		}
+	}
 
 	public function check_hand($payer_user, $P1, $P2, $P3, $P4, $Round, $cardData) {
 
-		//print_r($cardData);
-		//var_dump($payer_user);
-		//var_dump($P1);
-		//var_dump($P2);
-		//var_dump($P4);
-		//PUTDATE BARS
+		$p = $cardData["PUTDATE"]["player" . $payer_user]["BARS"];
+		if ($p == " ") {
+			$C = 0;
+		} else {
+			$C = count($cardData["PUTDATE"]["player" . $payer_user]["BARS"]);
+		}
+		echo $C . "\n";
+		//$MAX = $this->MAX_hand($C);
+
+		$p0 = $cardData["player" . $payer_user];
+		$p1 = $cardData["PUTDATE"]["player" . $payer_user]["SHUN"];
+		$p2 = $cardData["PUTDATE"]["player" . $payer_user]["SECTION"];
+		$p3 = $cardData["PUTDATE"]["player" . $payer_user]["BARS"];
+		$C0 = $this->check_null($p0);
+		$C1 = $this->check_null($p1);
+		$C2 = $this->check_null($p2);
+		$C3 = $this->check_null($p3);
+		$sum = $C0 + $C1 + $C2 + $C3;
+		$MAX = 13;
+
+		if ($C == '0') {
+			$MAX = $MAX;
+		} else if ($C == '4') {
+			$MAX = $MAX + 1;
+		} else if ($C == '8') {
+			$MAX = $MAX + 2;
+		} else if ($C == '12') {
+			$MAX = $MAX + 3;
+		} else if ($C == '16') {
+			$MAX = $MAX + 4;
+		}
+		echo $MAX . "\n";
+/*
+$C0 = count($cardData["PUTDATE"]["player" . $payer_user]);
+$C1 = count($cardData["PUTDATE"]["player" . $payer_user]["SHUN"]);
+$C2 = count($cardData["PUTDATE"]["player" . $payer_user]["SECTION"]);
+$C3 = count($cardData["PUTDATE"]["player" . $payer_user]["BARS"]);
+ */
 		switch ($payer_user) {
 		case "1":
-			switch ($Round) {
-			case "1234":
+			if ($Round == "1234" and $payer_user = 1) {
 				echo '正確回合';
-				$C = count($cardData["PUTDATE"]["player1"]["BARS"]);
-				if (empty($C)) {
-					$C = 0;
-				} else if ($C == " ") {
-					$C = 0;
-				} else {
-					$C = $C;
-				}
-
-				$MAX = $this->MAX_hand($C);
-
-				if ($P1 != $MAX) {
-					$OK = 0;
+				echo $C0 . "-" . $C1 . "-" . $C2 . "-" . $C3 . "-" . "\n";
+				if ($MAX == $sum) {
+					echo "抽牌 \n";
 					return 0;
 				} else {
-					echo '錯誤手牌';
-					$OK = 1;
+					echo "不抽牌 \n";
 					return 1;
 				}
-				break;
-			default:
-				echo '不正確回合';
-				$OK = 1;
+			} else {
+
+				echo "錯誤使用者 不抽牌 \n";
 				return 1;
+
 			}
+
 			break;
 		case "2":
-			switch ($Round) {
-			case "2341":
+			if ($Round == "2341" and $payer_user = 1) {
 				echo '正確回合';
-				$C = count($cardData["PUTDATE"]["player1"]["BARS"]);
-				if (empty($C)) {
-					$C = 0;
-				} else if ($C == " ") {
-					$C = 0;
-				} else {
-					$C = $C;
-				}
-
-				$MAX = $this->MAX_hand($C);
-				if ($P2 != $MAX) {
-					$OK = 0;
+				echo $C0 . "-" . $C1 . "-" . $C2 . "-" . $C3 . "-" . "\n";
+				if ($MAX == $sum) {
+					echo "抽牌 \n";
 					return 0;
 				} else {
-					echo '錯誤手牌';
-					$OK = 1;
+					echo "不抽牌 \n";
 					return 1;
 				}
-				break;
-			default:
-				echo '不正確回合';
-				$OK = 1;
+			} else {
+
+				echo "錯誤使用者 不抽牌 \n";
 				return 1;
+
 			}
 			break;
 		case "3":
-
-			switch ($Round) {
-			case "3412":
+			if ($Round == "3412" and $payer_user = 1) {
 				echo '正確回合';
-				$C = count($cardData["PUTDATE"]["player1"]["BARS"]);
-				if (empty($C)) {
-					$C = 0;
-				} else if ($C == " ") {
-					$C = 0;
-				} else {
-					$C = $C;
-				}
-
-				$MAX = $this->MAX_hand($C);
-				if ($P3 != $MAX) {
-					$OK = 0;
+				echo $C0 . "-" . $C1 . "-" . $C2 . "-" . $C3 . "-" . "\n";
+				if ($MAX == $sum) {
+					echo "抽牌 \n";
 					return 0;
 				} else {
-					echo '錯誤手牌';
-					$OK = 1;
+					echo "不抽牌 \n";
 					return 1;
 				}
-				break;
-			default:
-				echo '不正確回合';
-				$OK = 1;
+			} else {
+
+				echo "錯誤使用者 不抽牌 \n";
 				return 1;
+
 			}
 			break;
 		case "4":
-			switch ($Round) {
-			case "4123":
+			if ($Round == "4123" and $payer_user = 1) {
 				echo '正確回合';
-				$C = count($cardData["PUTDATE"]["player1"]["BARS"]);
-				if (empty($C)) {
-					$C = 0;
-				} else if ($C == " ") {
-					$C = 0;
-				} else {
-					$C = $C;
-				}
-
-				$MAX = $this->MAX_hand($C);
-				if ($P4 != $MAX) {
-					$OK = 0;
+				echo $C0 . "-" . $C1 . "-" . $C2 . "-" . $C3 . "-" . "\n";
+				if ($MAX == $sum) {
+					echo "抽牌 \n";
 					return 0;
 				} else {
-					echo '錯誤手牌';
-					$OK = 1;
+					echo "不抽牌 \n";
 					return 1;
 				}
-				break;
-			default:
-				echo '不正確回合';
-				$OK = 1;
+			} else {
+
+				echo "錯誤使用者 不抽牌 \n";
 				return 1;
+
 			}
+
 			break;
+
 		default:
-			return 0;
-			//echo "Your favorite color is neither red, blue, nor green!";
+
 		}
 	}
 	public function cardData_player($cardData) {
@@ -397,6 +511,10 @@ class Userinformation {
 		$P42 = $this->count_p($cardData["PUTDATE"]["player4"]["SECTION"]);
 		$P43 = $this->count_p($cardData["PUTDATE"]["player4"]["BARS"]);
 
+		//echo $P11 . "-" . $P12 . "-" . $P13 . "\n";
+		//echo $P21 . "-" . $P22 . "-" . $P23 . "\n";
+		//echo $P31 . "-" . $P32 . "-" . $P33 . "\n";
+		//echo $P41 . "-" . $P42 . "-" . $P43 . "\n";
 		//$cccc = $this->count_p($cardData["PUTDATE"]["player1"]["SHUN"]);
 		/*
 	        $cardData_player[0] = count($cardData["player1"]);
@@ -413,17 +531,6 @@ class Userinformation {
 		return $cardData_player;
 	}
 	public function count_p($p) {
-		//print_r($p);
-		/*
-	        echo "string\n";
-	        if (empty($d)) {
-	        echo "string2\n";
-	        return 0;
-	        } else {
-	        echo "string3\n";
-	        return count($d);
-	        }
-*/
 		if (empty($p)) {
 			//echo "string2\n";
 			return 0;
@@ -440,139 +547,122 @@ class Userinformation {
 	}
 
 	public function check_outCard($payer_user, $Round, $P1, $P2, $P3, $P4, $cardData) {
-		//echo $payer_user."\n";
-		//echo $Round."\n";
-		//echo $P1."\n";
-		//echo $P2."\n";
-		//echo $P3."\n";
-		//echo $P4."\n";
-		//
+
+		$p = $cardData["PUTDATE"]["player" . $payer_user]["BARS"];
+		if ($p == " ") {
+			$C = 0;
+		} else {
+			$C = count($cardData["PUTDATE"]["player" . $payer_user]["BARS"]);
+		}
+		echo $C . "\n";
+		//$MAX = $this->MAX_hand($C);
+
+		$p0 = $cardData["player" . $payer_user];
+		$p1 = $cardData["PUTDATE"]["player" . $payer_user]["SHUN"];
+		$p2 = $cardData["PUTDATE"]["player" . $payer_user]["SECTION"];
+		$p3 = $cardData["PUTDATE"]["player" . $payer_user]["BARS"];
+		$C0 = $this->check_null($p0);
+		$C1 = $this->check_null($p1);
+		$C2 = $this->check_null($p2);
+		$C3 = $this->check_null($p3);
+		$sum = $C0 + $C1 + $C2 + $C3;
+		$MAX = 13;
+
+		if ($C == '0') {
+			$MAX = $MAX;
+		} else if ($C == '4') {
+			$MAX = $MAX + 1;
+		} else if ($C == '8') {
+			$MAX = $MAX + 2;
+		} else if ($C == '12') {
+			$MAX = $MAX + 3;
+		} else if ($C == '16') {
+			$MAX = $MAX + 4;
+		}
+		echo $MAX . "\n";
 
 		switch ($payer_user) {
 		case "1":
-			switch ($Round) {
-			case "1234":
+			if ($Round == "1234" and $payer_user = 1) {
 				echo '正確回合';
-
-				$p = $cardData["PUTDATE"]["player1"]["BARS"];
-				if ($p == " ") {
-					$C = 0;
-				} else {
-					$C = count($cardData["PUTDATE"]["player1"]["BARS"]);
-				}
-
-				//echo $C;
-				$MAX = $this->MAX_hand($C);
-				if ($P1 == '13' and $P2 == '13' and $P3 == '13' and $P4 == '13') {
-					echo '尚未開局';
-					$OK = 1;
+				echo $C0 . "-" . $C1 . "-" . $C2 . "-" . $C3 . "-" . "\n";
+				if ($MAX == $sum) {
+					echo "抽牌 \n";
 					return 1;
-
 				} else {
-					//echo $P1 . " - " . $P2 . " - " . $P3 . " - " . $P4 . " - ";
-
-					if ($P1 == $MAX or $P1 == '13' and $P2 == '13' and $P3 == '13' and $P4 == '13') {
-						$OK = 0;
-						return 0;
-					} else {
-						echo '錯誤手牌';
-						$OK = 1;
-						return 1;
-					}
-					//echo $OK;
-					break;
+					echo "打牌 \n";
+					return 0;
 				}
 
-			default:
-				echo '不正確回合';
-				$OK = 1;
+			} else {
+
+				echo "錯誤使用者 不抽牌 \n";
 				return 1;
+
 			}
+
 			break;
 		case "2":
-			switch ($Round) {
-			case "2341":
+			if ($Round == "2341" and $payer_user = 1) {
 				echo '正確回合';
-				$p = $cardData["PUTDATE"]["player1"]["BARS"];
-				if ($p == " ") {
-					$C = 0;
-				} else {
-					$C = count($cardData["PUTDATE"]["player1"]["BARS"]);
-				}
-				$MAX = $this->MAX_hand($C);
-				//if ($P2 == $MAX or $P2 == '13' and $P1 == '13' and $P3 == '13' and $P4 == '13') {
-				if ($P2 == $MAX and $P1 == '13' and $P3 == '13' and $P4 == '13') {
-					$OK = 0;
-					return 0;
-				} else {
-					echo '錯誤手牌';
-					$OK = 1;
+				echo $C0 . "-" . $C1 . "-" . $C2 . "-" . $C3 . "-" . "\n";
+				if ($MAX == $sum) {
+					echo "抽牌 \n";
 					return 1;
+				} else {
+					echo "打牌 \n";
+					return 0;
 				}
-				break;
-			default:
-				echo '不正確回合';
-				$OK = 1;
+
+			} else {
+
+				echo "錯誤使用者 不抽牌 \n";
 				return 1;
+
 			}
 			break;
 		case "3":
-
-			switch ($Round) {
-			case "3412":
+			if ($Round == "3412" and $payer_user = 1) {
 				echo '正確回合';
-				$p = $cardData["PUTDATE"]["player1"]["BARS"];
-				if ($p == " ") {
-					$C = 0;
-				} else {
-					$C = count($cardData["PUTDATE"]["player1"]["BARS"]);
-				}
-				$MAX = $this->MAX_hand($C);
-				//if ($P3 == $MAX or $P3 == '13' and $P1 == '13' and $P2 == '13' and $P4 == '13') {
-				if ($P3 == $MAX and $P1 == '13' and $P2 == '13' and $P4 == '13') {
-					$OK = 0;
-					return 0;
-				} else {
-					echo '錯誤手牌';
-					$OK = 1;
+				echo $C0 . "-" . $C1 . "-" . $C2 . "-" . $C3 . "-" . "\n";
+				if ($MAX == $sum) {
+					echo "抽牌 \n";
 					return 1;
+				} else {
+					echo "打牌 \n";
+					return 0;
 				}
-				break;
-			default:
-				echo '不正確回合';
-				$OK = 1;
+
+			} else {
+
+				echo "錯誤使用者 不抽牌 \n";
 				return 1;
+
 			}
 			break;
 		case "4":
-			switch ($Round) {
-			case "4123":
+			if ($Round == "4123" and $payer_user = 1) {
 				echo '正確回合';
-				$p = $cardData["PUTDATE"]["player1"]["BARS"];
-				if ($p == " ") {
-					$C = 0;
-				} else {
-					$C = count($cardData["PUTDATE"]["player1"]["BARS"]);
-				}
-				$MAX = $this->MAX_hand($C);
-				//if ($P4 == $MAX or $P4 == '13' and $P1 == '13' and $P2 == '13' and $P3 == '13') {
-				if ($P4 == $MAX and $P1 == '13' and $P2 == '13' and $P3 == '13') {
-					$OK = 0;
-					return 0;
-				} else {
-					echo '錯誤手牌';
-					$OK = 1;
+				echo $C0 . "-" . $C1 . "-" . $C2 . "-" . $C3 . "-" . "\n";
+				if ($MAX == $sum) {
+					echo "抽牌 \n";
 					return 1;
+				} else {
+					echo "打牌 \n";
+					return 0;
 				}
-				break;
-			default:
-				echo '不正確回合';
-				$OK = 1;
+
+			} else {
+
+				echo "錯誤使用者 不抽牌 \n";
 				return 1;
+
 			}
+
 			break;
+
 		default:
-			//echo "Your favorite color is neither red, blue, nor green!";
+
 		}
 	}
 //check_outCard_round
@@ -628,18 +718,32 @@ class Userinformation {
 
 	}
 	public function MAX_hand($c) //最大手牌
-
 	{
-		if ($c = 0) {
-			return $MAX = 13;
-		} elseif ($c = 1) {
-			return $MAX = 14;
-		} elseif ($c = 2) {
-			return $MAX = 15;
-		} elseif ($c = 3) {
-			return $MAX = 16;
-		} elseif ($c = 4) {
-			return $MAX = 17;
+		/*
+			if ($c = 0) {
+				return 13;
+			} elseif ($c = 1) {
+				return 14;
+			} elseif ($c = 2) {
+				return 15;
+			} elseif ($c = 3) {
+				return 16;
+			} elseif ($c = 4) {
+				return 17;
+			}
+		*/
+		if ($c = 4) {
+			return 14;
+		} elseif ($c = 8) {
+			return 15;
+		} elseif ($c = 12) {
+			return 16;
+		} elseif ($c = 16) {
+			return 17;
+		} else {
+			return 13;
 		}
+
+		//echo $c . "\n";
 	}
 }

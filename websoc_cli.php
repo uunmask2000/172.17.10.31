@@ -75,6 +75,10 @@
         var ws = new WebsocketClass(msg, usr1, usr2, usr3, usr4, window.Room_setting, window.Player_setting);
 	    //var room_key = 1 ;
 
+       setInterval(function(){
+        //alert("Hello");
+        ws.send(window.Room_setting, window.Player_setting, 999, "Heartbeat", 0);
+        }, 99999999);
 
 		$(document).on("click", "button", function () {
 			// 判斷牌合
@@ -145,10 +149,10 @@ button {
     cursor: pointer;
     font-weight:bold;
 }
-#button1 {font-size: 10px;  background-color: #2a6b4f ; }
-#button2 {font-size: 10px;  background-color: #c62b52 ; }
-#button3 {font-size: 10px;  background-color: #a9baa3 ; }
-#button4 {font-size: 10px;  background-color: #c48d2f ; }
+#button1 {font-size: 20px;  background-color: #2a6b4f ; }
+#button2 {font-size: 20px;  background-color: #c62b52 ; }
+#button3 {font-size: 20px;  background-color: #a9baa3 ; }
+#button4 {font-size: 20px;  background-color: #c48d2f ; }
 </style>
 
 </head>

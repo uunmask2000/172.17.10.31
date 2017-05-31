@@ -3,7 +3,7 @@
  *
  *
  */
-set_time_limit(0);
+/// set_time_limit(0);
 date_default_timezone_set("Asia/Taipei");
 class BroadcastServer {
 	private $serv;

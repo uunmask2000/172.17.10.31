@@ -132,6 +132,25 @@
 	});
 
     </script>
+<style>
+button {
+    background-color: #2797c6;
+    border: none;
+    color: black;
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 1px 1px;
+    cursor: pointer;
+    font-weight:bold;
+}
+#button1 {font-size: 10px;  background-color: #2a6b4f ; }
+#button2 {font-size: 10px;  background-color: #c62b52 ; }
+#button3 {font-size: 10px;  background-color: #a9baa3 ; }
+#button4 {font-size: 10px;  background-color: #c48d2f ; }
+</style>
+
 </head>
 <body>
 Room :　<span id="Room_setting">_</span>
