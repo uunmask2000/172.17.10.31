@@ -3,7 +3,7 @@
  *
  *
  */
-set_time_limit(0);
+//set_time_limit(0);
 date_default_timezone_set("Asia/Taipei");
 require dirname(__FILE__) . "/libs/Cardbox.php";
 require dirname(__FILE__) . "/libs/Userinformation.php";
@@ -177,7 +177,7 @@ class DataProcessServer {
 						//var_dump($push_out_card2);
 
 						// 自動call下家 拿牌
-						$cardData = $this->auto_put($data, $key2, $deCodeData, $Round_array);
+						//$cardData = $this->auto_put($data, $key2, $deCodeData, $Round_array);
 
 						//print_r($cardData);
 						//call 拿牌
@@ -269,12 +269,55 @@ class DataProcessServer {
 				echo "收到 碰 事件 \n";
 				$Userinformation = new Userinformation();
 				$RECEIVE = $Userinformation->BUMP($data, $cardData);
+				//$RECEIVE["Round_row"] = ($RECEIVE["Round"] + 1);
+				//print_r($RECEIVE);
+				$RECEIVE2 = (json_decode($RECEIVE, true));
+				//print_r($RECEIVE2);
+				print_r($RECEIVE2["cardData"]);
+				print_r($RECEIVE2["userData"]);
+				$RECEIVE2["event"] = "getCard";
+				$RECEIVE2["userData"]["event"] = "getCard";
+				$RECEIVE2 = json_encode($RECEIVE2);
+				$this->redis->hset("CardList", $parseData['roomId'], json_encode($RECEIVE2["cardData"]));
+				$this->redis->hset("Round", $parseData['roomId'], json_encode($RECEIVE2["Round"]));
+				$this->redis->RPUSH('message', $RECEIVE2);
 				/*
-					                    $parseData = json_decode($data, true);
-					                    $push_out_card2 = (json_decode($this->redis->hget("push_out_card", $parseData['roomId']), true)); //查詢 廢棄池牌
-					                    $output = explode(",", substr($push_out_card2, 0, -1));
-					                    echo end($output) . "\n";
-					                    print_r($parseData) . "\n";
+					$this->redis->hset("CardList", $parseData['roomId'], json_encode($RECEIVE2["cardData"]));
+					$this->redis->hset("Round", $parseData['roomId'], json_encode($RECEIVE2["Round"]));
+					$Round_row = json_decode($this->redis->hget("Round_row", $parseData['roomId']), true); //取得回合數
+				*/
+
+				//print_r($RECEIVE2["cardData"]);
+				//$this->redis->hset("CardList", $parseData['roomId'], json_encode($RECEIVE["cardData"]));
+				//print_r($RECEIVE["cardData"]);
+				//$retVal = json_encode($RECEIVE);
+				/*
+				$newCard = array_shift($cardData['endCard']);
+				$payer_user = $parseData['player'];
+				$retVal = [];
+				$deCodeData['event'] = "getCard";
+				$retVal['event'] = $deCodeData['event'];
+				$retVal['userData'] = $deCodeData;
+				$A = array();
+				$cardData["player" . $parseData["player"]] = $A;
+				$retVal['cardData'] = $cardData;
+				$retVal['Round'] = $Round_array;
+				$retVal['Round_row'] = $Round_row;
+				//var_dump($retVal) ;
+				print_r($$cardData["player" . $parseData["player"]]);
+				print_r($retVal);
+				$retVal = json_encode($retVal);
+				$this->redis->hset("CardList", $parseData['roomId'], json_encode($cardData));
+				$this->redis->hset("gameLog", $parseData['roomId'], json_encode($data));
+				$this->redis->hset("Round", $deCodeData['roomId'], json_encode($Round_array));
+				$this->redis->RPUSH('message', $retVal);
+*/
+				/*
+					$this->redis->hset("CardList", $parseData['roomId'], json_encode($RECEIVE["cardData"]));
+					$this->redis->hset("gameLog", $parseData['roomId'], json_encode($data));
+					$this->redis->hset("Round", $parseData['roomId'], json_encode($RECEIVE["Round"]));
+					$this->redis->hset("Round_row", $parseData['roomId'], json_encode($RECEIVE["Round_row"])); // 回合數+1
+					$this->redis->RPUSH('message', $retVal);
 				*/
 				break;
 			case 'BARS': //槓
