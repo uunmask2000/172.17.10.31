@@ -97,6 +97,15 @@
 			case 'RoundEnd':
                 render(msg, usr1, usr2, usr3, usr4, data);
                 break;	
+            case 'BARS_out':
+                render(msg, usr1, usr2, usr3, usr4, data);
+                break;
+            case 'RECEIVE_out':
+                render(msg, usr1, usr2, usr3, usr4, data);
+                break;
+            case 'BUMP_out':
+                render(msg, usr1, usr2, usr3, usr4, data);
+                break;
         }
 
 
@@ -166,4 +175,11 @@
             node.innerHTML = entry;
             usr4.appendChild(node);
         });
+
+        var  Round = data.Round; ;
+        var  Round_row = data.Round_row; 
+        document.getElementById("Round").innerHTML = Round ;
+        document.getElementById("Round_row").innerHTML =  Round_row  ;
+        //alert (Round);
+        //alert (Round_row);
     }

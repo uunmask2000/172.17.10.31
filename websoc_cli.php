@@ -77,8 +77,8 @@
 
        setInterval(function(){
         //alert("Hello");
-        ws.send(window.Room_setting, window.Player_setting, 999, "Heartbeat", 0);
-        }, 99999999);
+        ws.send(window.Room_setting, window.Player_setting , 999, "Heartbeat", 0);
+        }, 5000);
 
 		$(document).on("click", "button", function () {
 			// 判斷牌合
@@ -149,10 +149,10 @@ button {
     cursor: pointer;
     font-weight:bold;
 }
-#button1 {font-size: 20px;  background-color: #2a6b4f ; }
-#button2 {font-size: 20px;  background-color: #c62b52 ; }
-#button3 {font-size: 20px;  background-color: #a9baa3 ; }
-#button4 {font-size: 20px;  background-color: #c48d2f ; }
+#button1 {font-size: 15px;  background-color: #2a6b4f ; }
+#button2 {font-size: 15px;  background-color: #c62b52 ; }
+#button3 {font-size: 15px;  background-color: #a9baa3 ; }
+#button4 {font-size: 15px;  background-color: #c48d2f ; }
 </style>
 
 </head>
@@ -161,11 +161,14 @@ Room :　<span id="Room_setting">_</span>
 <br>
 Player :　<span id="Player_n">_</span>
 <br>
+Round:<div id="Round"></div>
+Round_row:<div id="Round_row"></div>
 CardBox:<div id="msg"></div>
 Player1:<div id="usr1"></div>
 Player2:<div id="usr2"></div>
 Player3:<div id="usr3"></div>
 Player4:<div id="usr4"></div>
+
 <!--
 <button id="getCard">拿牌</button>
 -->

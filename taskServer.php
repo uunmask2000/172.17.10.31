@@ -296,6 +296,15 @@ class taskServer {
 			case 'Heartbeat': // 心跳
 				$this->redis->RPUSH('dataProcess', $frame->data);
 				break;
+			case 'BARS_out': //
+				$this->redis->RPUSH('dataProcess', $frame->data);
+				break;
+			case 'RECEIVE_out': //
+				$this->redis->RPUSH('dataProcess', $frame->data);
+				break;
+			case 'BUMP_out': //
+				$this->redis->RPUSH('dataProcess', $frame->data);
+				break;
 			default:
 				# code...
 				break;

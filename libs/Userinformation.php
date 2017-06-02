@@ -205,6 +205,10 @@ class Userinformation {
 					}
 				}
 			}
+			// 槓 藥補一張牌
+			$newCard = array_pop($cardData['endCard']);
+			array_push($cardData["player" . $parseData["player"]], $newCard);
+
 			$cardData["player" . $parseData["player"]] = array_values($cardData["player" . $parseData["player"]]);
 			//print_r($cardData["player" . $parseData["player"]]);
 			if ($cardData["PUTDATE"]["player" . $parseData["player"]]["BARS"] == ' ') {

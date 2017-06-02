@@ -3,11 +3,12 @@
  *
  *
  */
+//31
 //set_time_limit(0);
 date_default_timezone_set("Asia/Taipei");
 require dirname(__FILE__) . "/libs/Cardbox.php";
 require dirname(__FILE__) . "/libs/Userinformation.php";
-
+require dirname(__FILE__) . "/libs/CheckWin.php";
 class DataProcessServer {
 	private $serv;
 	private $pdo;
@@ -84,7 +85,7 @@ class DataProcessServer {
 				$retVal['event'] = $deCodeData['event'];
 				$retVal['userData'] = $deCodeData;
 				$retVal = json_encode($retVal);
-				//$this->redis->RPUSH('message', $retVal);
+				$this->redis->RPUSH('message', $retVal);
 				break;
 			case 'initCard': //牌盒
 				$cardBox = new Carbox();
@@ -158,6 +159,7 @@ class DataProcessServer {
 					$retVal['cardData'] = $cardData;
 					$retVal['push_out_card'] = $push_out_card;
 					$retVal['Round_row'] = $Round_row;
+					$retVal['Round'] = $Round_array;
 					$retVal = json_encode($retVal);
 
 					if ($OK != 1) {
@@ -180,8 +182,19 @@ class DataProcessServer {
 						$retVal['userData'] = $deCodeData;
 						$retVal['cardData'] = $cardData;
 						$retVal['send_remind'] = $send_remind;
+						$retVal['Round'] = $Round_array;
 						$retVal = json_encode($retVal);
-
+						//print_r($send_remind);
+						$result_end = array();
+						foreach ($send_remind as $key => $value) {
+							//echo $key . "\n";
+							foreach ($value as $key2 => $value2) {
+								//echo $key2 . "\n";
+								if ($value2 != -1) {
+									echo $key . $key2 . " 可執行\n";
+								}
+							}
+						}
 						$this->redis->RPUSH('message', $retVal);
 						//var_dump($push_out_card2);
 
@@ -204,6 +217,7 @@ class DataProcessServer {
 							$retVal['event'] = $deCodeData['event'];
 							$retVal['userData'] = $deCodeData;
 							$retVal['cardData'] = $cardData;
+							$retVal['Round'] = $Round_array;
 							$retVal = json_encode($retVal);
 
 							$this->redis->RPUSH('message', $retVal);
@@ -274,6 +288,56 @@ class DataProcessServer {
 						$this->redis->hset("Round", $deCodeData['roomId'], json_encode($Round_array));
 						$this->redis->RPUSH('message', $retVal);
 					}
+					/// 是否胡牌
+					$CheckWin = new CheckWin();
+					$cardData_new = json_decode($this->redis->hget("CardList", $parseData['roomId']), true); // 取redis 牌
+					//echo $key . "\n";
+					//echo print_r($cardData_new) . "\n";
+					//echo print_r($cardData_new[$key]) . "\n";
+					//echo print_r($cardData_new["PUTDATE"][$key]) . "\n";
+					if ($cardData_new["PUTDATE"][$key]["SHUN"] == " ") {
+						$cardData_new["PUTDATE"][$key]["SHUN"] = array();
+					}
+					if ($cardData_new["PUTDATE"][$key]["SECTION"] == " ") {
+						$cardData_new["PUTDATE"][$key]["SECTION"] = array();
+					}
+					if ($cardData_new["PUTDATE"][$key]["BARS"] == " ") {
+						$cardData_new["PUTDATE"][$key]["BARS"] = array();
+					}
+					$hand = $cardData_new[$key];
+					$right = array_merge($cardData_new["PUTDATE"][$key]["SHUN"], $cardData_new["PUTDATE"][$key]["SECTION"], $cardData_new["PUTDATE"][$key]["BARS"]);
+					$dealerCount = 1;
+					$selfTouch = 1;
+					$selfWind = "東風";
+					$wind = "西風";
+					$leftNum = 0;
+					$kongFlower = 0;
+					$banker = 1;
+					$circle = 1;
+					$listen = array(15);
+					## 執行胡牌驗證
+					@$res = $CheckWin->checkWinningModel($hand, $right, $selfTouch, $wind, $selfWind, $leftNum, $kongFlower, $banker, $circle, $new, $listen);
+					$point = $res[count($res) - 1];
+					array_splice($res, count($res) - 1);
+					if ($point != 0) {
+						## 胡牌动作
+						if ($selfTouch == 1) {
+							$kk = "yes";
+							echo "\n" . "自摸" . "\n";
+							echo "\n 共 " . $point . " 番  \n";
+							//return 1;
+						} else {
+							$kk = "yes";
+							echo "\n " . "胡" . "\n";
+							echo "\n 共 " . $point . " 番\n";
+							//return 2;
+						}
+					} else {
+						$kk = "no";
+						echo "NO!!! \n";
+					}
+					///
+
 				}
 
 				break;
@@ -294,18 +358,22 @@ class DataProcessServer {
 				$cardData1 = $J_BUMP_date["cardData"];
 				$Round1 = $J_BUMP_date["Round"];
 				$retVal = [];
-				$deCodeData['event'] = "getCard";
-				$deCodeData['type'] = "11";
+				$deCodeData['event'] = "BUMP_out";
+				$deCodeData['type'] = "210";
 				$retVal['event'] = $deCodeData['event'];
 				$retVal['userData'] = $deCodeData;
 
 				$retVal['cardData'] = $cardData1;
 				$retVal['send_remind'] = " ";
+				$retVal['Round'] = $Round1;
+				$Round_row = ($Round_row + 1);
+				$retVal['Round_row'] = $Round_row;
 				$retVal = json_encode($retVal);
 				//$cardData = $RECEIVE_date["cardData"];
 				//echo $Round1 . "\n";
 				//print_r($parseData['roomId']);
 				$this->redis->hset("CardList", $parseData['roomId'], json_encode($cardData1));
+				$this->redis->hset("Round_row", $parseData['roomId'], json_encode($Round_row));
 				$this->redis->hset("Round", $parseData['roomId'], json_encode($Round1));
 				$this->redis->RPUSH('message', $retVal);
 
@@ -316,6 +384,7 @@ class DataProcessServer {
 				break;
 			case 'BARS': //槓
 				echo "收到 槓 事件 \n";
+				//print_r($parseData);
 				$Userinformation = new Userinformation();
 				//$RECEIVE = $Userinformation->BARS($data, $cardData);
 				/*
@@ -334,13 +403,16 @@ class DataProcessServer {
 				$cardData1 = $J_RECEIVE_date["cardData"];
 				$Round1 = $J_RECEIVE_date["Round"];
 				$retVal = [];
-				$deCodeData['event'] = "getCard";
-				$deCodeData['type'] = "11";
+				$deCodeData['event'] = "BARS_out";
+				$deCodeData['type'] = "220";
 				$retVal['event'] = $deCodeData['event'];
 				$retVal['userData'] = $deCodeData;
 
 				$retVal['cardData'] = $cardData1;
 				$retVal['send_remind'] = " ";
+				$retVal['Round'] = $Round1;
+				$Round_row = ($Round_row + 1);
+				$retVal['Round_row'] = $Round_row;
 				$retVal = json_encode($retVal);
 				//print_r($Round1) . "\n";
 				//print_r($cardData1) . "\n";
@@ -349,12 +421,18 @@ class DataProcessServer {
 				//print_r($parseData['roomId']);
 				$this->redis->hset("CardList", $parseData['roomId'], json_encode($cardData1));
 				$this->redis->hset("Round", $parseData['roomId'], json_encode($Round1));
+				$this->redis->hset("Round_row", $parseData['roomId'], json_encode($Round_row));
 
 				// 要取牌
-				//$cardData = json_decode($this->redis->hget("CardList", $parseData['roomId']), true);
-				//$player = "player" . $parseData['player'];
-				//$newCard = array_shift($cardData['endCard']);
-				//array_push($cardData[$player], $newCard);
+				/*
+				$cardData = json_decode($this->redis->hget("CardList", $parseData['roomId']), true);
+				$player = "player" . $parseData['player'];
+				echo $player . "\n";
+				$newCard = array_pop($cardData['endCard']);
+				array_push($cardData[$player], $newCard);
+				print_r($cardData[$player]);
+				*/
+				//print_r($deCodeData);
 				//$this->redis->hset("CardList", $parseData['roomId'], json_encode($cardData1));
 				//echo $player . "\n";
 				//echo $newCard . "\n";
@@ -375,13 +453,16 @@ class DataProcessServer {
 				$cardData1 = $J_RECEIVE_date["cardData"];
 				$Round1 = $J_RECEIVE_date["Round"];
 				$retVal = [];
-				$deCodeData['event'] = "getCard";
-				$deCodeData['type'] = "11";
+				$deCodeData['event'] = "RECEIVE_out";
+				$deCodeData['type'] = "200";
 				$retVal['event'] = $deCodeData['event'];
 				$retVal['userData'] = $deCodeData;
 
 				$retVal['cardData'] = $cardData1;
 				$retVal['send_remind'] = " ";
+				$retVal['Round'] = $Round1;
+				$Round_row = ($Round_row + 1);
+				$retVal['Round_row'] = $Round_row;
 				$retVal = json_encode($retVal);
 				//print_r($Round1) . "\n";
 				//print_r($cardData1) . "\n";
@@ -390,6 +471,7 @@ class DataProcessServer {
 				//print_r($parseData['roomId']);
 				$this->redis->hset("CardList", $parseData['roomId'], json_encode($cardData1));
 				$this->redis->hset("Round", $parseData['roomId'], json_encode($Round1));
+				$this->redis->hset("Round_row", $parseData['roomId'], json_encode($Round_row));
 				$this->redis->RPUSH('message', $retVal);
 
 				/*
@@ -512,7 +594,7 @@ class DataProcessServer {
 		//$P1_result[] = array();
 		$P1_result["RECEIVE"] = $this->check_RECEIVE($player1, $parseData["data"]);
 		$P1_result["BUMP"] = $this->check_BUMP($player1, $parseData["data"]);
-		$P1result["BARS"] = $this->check_BARS($player1, $parseData["data"]);
+		$P1_result["BARS"] = $this->check_BARS($player1, $parseData["data"]);
 		$result["P1"] = $P1_result;
 		$result["P2"] = $P2_result;
 		$result["P3"] = $P3_result;
@@ -711,6 +793,9 @@ class DataProcessServer {
 				} else if ($row != '0' and $row2 == '0' and $row3 != '0') {
 					$Arr2[1] = $data2;
 					return $Arr2;
+				} else if ($row == '0' and $row2 != '0' and $row3 != '0') {
+					$Arr1[1] = $data2;
+					return $Arr1;
 				} else {
 					return -1;
 				}
@@ -770,9 +855,13 @@ class DataProcessServer {
 				} else if ($row != '0' and $row2 == '0' and $row3 != '0') {
 					$Arr2[1] = $data2;
 					return $Arr2;
+				} else if ($row == '0' and $row2 != '0' and $row3 != '0') {
+					$Arr1[1] = $data2;
+					return $Arr1;
 				} else {
 					return -1;
 				}
+
 				break;
 			default:
 				$Arr1[0] = $A4;

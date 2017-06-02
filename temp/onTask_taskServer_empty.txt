@@ -4509,3 +4509,744 @@ swoole_websocket_frame Object
 )
 
 -------------------------
+-------------------------
+2017-06-01 09:12:45taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":4,"player":2,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:17:38taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 2
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":2,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:28:29taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:30:13taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:31:23taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:32:29taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:34:12taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:37:48taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:40:45taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:41:43taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:43:20taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:45:54taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:50:43taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:54:33taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":3,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 09:56:54taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:01:42taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:05:18taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:05:56taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:09:26taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":4,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:11:21taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:12:37taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:24:18taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:33:48taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:39:50taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:42:12taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":2,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:45:23taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":4,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:45:28taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":null,"player":null,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 10:50:47taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 11:02:38taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 11:08:55taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 11:10:51taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 11:24:55taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 11:27:25taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 11:27:45taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 11:29:27taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 12:29:10taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 12:31:13taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 12:32:42taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 13:24:44taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 13:49:10taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 13:49:46taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 13:55:55taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 14:06:54taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 14:10:55taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 14:13:41taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 15:32:36taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":1,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 15:52:03taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 15:55:39taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 15:59:20taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 16:50:06taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":1,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 17:33:08taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":1,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 17:33:31taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":1,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 17:37:27taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":1,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 17:43:27taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":1,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 17:47:24taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":1,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-01 17:54:36taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
+-------------------------
+2017-06-02 08:45:51taskServer onTask Runing empty 
+0
+0
+swoole_websocket_frame Object
+(
+    [fd] => 1
+    [finish] => 1
+    [opcode] => 1
+    [data] => {"roomId":2,"player":1,"type":7,"event":"JoinRoom","data":"","server":"Server1"}
+)
+
+-------------------------
